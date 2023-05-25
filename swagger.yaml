@@ -1,0 +1,1470 @@
+openapi: 3.0.0
+info:
+  title: Legal Advice
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://legal-advice-1812.onrender.com/api/v1
+  variables: {}
+- url: http://localhost:1812/api/v1
+  variables: {}
+paths:
+  /user/signup:
+    post:
+      tags:
+      - User
+      summary: Signup
+      operationId: Signup
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SignupRequest'
+              - example:
+                  name: Test
+                  email: test@gmail.com
+                  password: '123456'
+            example:
+              name: Test
+              email: test@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/login:
+    post:
+      tags:
+      - User
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: test@gmail.com
+                  password: '123456'
+            example:
+              email: test@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/forgetPassword:
+    post:
+      tags:
+      - User
+      summary: Forget Password
+      operationId: ForgetPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ForgetPasswordRequest'
+              - example:
+                  email: mh3908334@gmail.com
+            example:
+              email: mh3908334@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/verifyResetCode:
+    post:
+      tags:
+      - User
+      summary: Verify Reset Code
+      operationId: VerifyResetCode
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/VerifyResetCodeRequest'
+              - example:
+                  email: mh3908334@gmail.com
+                  resetCode: '573257'
+            example:
+              email: mh3908334@gmail.com
+              resetCode: '573257'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/resetPassword:
+    post:
+      tags:
+      - User
+      summary: Reset Password
+      operationId: ResetPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ResetPasswordRequest'
+              - example:
+                  newPassword: '123456'
+                  email: mh3908334@gmail.com
+            example:
+              newPassword: '123456'
+              email: mh3908334@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /info/links:
+    get:
+      tags:
+      - Videos
+      summary: Get All Links Of Videos
+      operationId: GetAllLinksOfVideos
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Videos
+      summary: Add Links Of Videos
+      operationId: AddLinksOfVideos
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AddLinksOfVideosRequest'
+              - example:
+                  videos:
+                  - Test 1
+                  - Test 2
+                  - Test 55
+            example:
+              videos:
+              - Test 1
+              - Test 2
+              - Test 55
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Videos
+      summary: Remove Link
+      operationId: RemoveLink
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RemoveLinkRequest'
+              - example:
+                  link: Test4
+            example:
+              link: Test4
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /user/{id}:
+    get:
+      tags:
+      - About Me
+      summary: Get About Me
+      operationId: GetAboutMe
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - About Me
+      summary: Update About Me
+      operationId: UpdateAboutMe
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              - name
+              - email
+              - phone
+              - aboutMe
+              - specializations
+              - experiences
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                name:
+                  type: string
+                  example: Test
+                email:
+                  type: string
+                  example: test@test.com
+                phone:
+                  type: string
+                  example: '01154604708'
+                aboutMe:
+                  type: string
+                  example: Test
+                specializations:
+                  type: string
+                  example: Test
+                experiences:
+                  type: string
+                  example: Test
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/admin/{id}:
+    post:
+      tags:
+      - About Me
+      summary: About Me
+      operationId: AboutMe
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              - name
+              - email
+              - phone
+              - aboutMe
+              - specializations
+              - qualifications
+              - experiences
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                name:
+                  type: string
+                  example: Admin
+                email:
+                  type: string
+                  example: mh3908334@test.com
+                phone:
+                  type: string
+                  example: '01154604708'
+                aboutMe:
+                  type: string
+                  example: Test
+                specializations:
+                  type: string
+                  example: Test 1
+                qualifications:
+                  type: string
+                  example: Test 1
+                experiences:
+                  type: string
+                  example: Test 1
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/admin/signup:
+    patch:
+      tags:
+      - About Me
+      summary: Signup As Admin
+      operationId: SignupAsAdmin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SignupAsAdminRequest'
+              - example:
+                  name: Admin
+                  email: admin@gmail.com
+                  password: '123456'
+            example:
+              name: Admin
+              email: admin@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /info/criminalDictionary/{id}:
+    delete:
+      tags:
+      - Criminal Dictionary
+      summary: Remove Criminal Dictionary
+      operationId: RemoveCriminalDictionary
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Criminal Dictionary
+      summary: Get Specific Criminal Dictionary
+      operationId: GetSpecificCriminalDictionary
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /info/criminalDictionary:
+    post:
+      tags:
+      - Criminal Dictionary
+      summary: Add Criminal Dictionary
+      operationId: AddCriminalDictionary
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AddCriminalDictionaryRequest'
+              - example:
+                  title: Test
+                  decs: ' Test Test Test Test Test Test Test Test Test '
+            example:
+              title: Test
+              decs: ' Test Test Test Test Test Test Test Test Test '
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Criminal Dictionary
+      summary: Get All Criminal Dictionary
+      operationId: GetAllCriminalDictionary
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /news:
+    post:
+      tags:
+      - News
+      summary: Add New
+      operationId: AddNew
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              - title
+              - desc
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                  example: Test
+                desc:
+                  type: string
+                  example: 'Tesr Tesr Tesr Tesr Tesr Tesr Tesr Tesr Tesr Tesr Tesr '
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - News
+      summary: Get All News
+      operationId: GetAllNews
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /news/{id}:
+    patch:
+      tags:
+      - News
+      summary: Update New
+      operationId: UpdateNew
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateNewRequest'
+              - example:
+                  title: 'Test '
+            example:
+              title: 'Test '
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - News
+      summary: Get Specific New
+      operationId: GetSpecificNew
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - News
+      summary: Delete Specific New
+      operationId: DeleteSpecificNew
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /messages:
+    get:
+      tags:
+      - Message
+      summary: Get All Messages
+      operationId: GetAllMessages
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Message
+      summary: Send Message To Lawyer
+      operationId: SendMessageToLawyer
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - text
+              - image
+              - file
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: Test 2
+                image:
+                  type: string
+                  format: binary
+                file:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /messages/{id}:
+    get:
+      tags:
+      - Message
+      summary: Get Specific Message
+      operationId: GetSpecificMessage
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Message
+      summary: Update Specific Message
+      operationId: UpdateSpecificMessage
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - text
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: Updated Test
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Message
+      summary: Delete Specific Message
+      operationId: DeleteSpecificMessage
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /messages/me:
+    get:
+      tags:
+      - Message
+      summary: Get My Message
+      operationId: GetMyMessage
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /questions:
+    get:
+      tags:
+      - Question
+      summary: Get All Questions
+      operationId: GetAllQuestions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Question
+      summary: Add Question
+      operationId: AddQuestion
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              - title
+              - subTitle[0][question]
+              - subTitle[0][answer]
+              - subTitle[1][question]
+              - subTitle[1][answer]
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                  example: القانون الجنائي
+                subTitle[0][question]:
+                  type: string
+                  example: سوال 6
+                subTitle[0][answer]:
+                  type: string
+                  example: اجابة 6
+                subTitle[1][question]:
+                  type: string
+                  example: سوال 66
+                subTitle[1][answer]:
+                  type: string
+                  example: اجابة 66
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /questions/{id}:
+    get:
+      tags:
+      - Question
+      summary: Get Specific Question
+      operationId: GetSpecificQuestion
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Question
+      summary: Update Specific Question
+      operationId: UpdateSpecificQuestion
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              - title
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                  example: الاوراق المالية
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Question
+      summary: Remove Specific Question
+      operationId: RemoveSpecificQuestion
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /orders:
+    post:
+      tags:
+      - Order
+      summary: Add Order
+      operationId: AddOrder
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AddOrderRequest'
+              - example:
+                  reason: Test
+                  desc: Test
+                  phone: '01544604708'
+                  date: 2012-7
+            example:
+              reason: Test
+              desc: Test
+              phone: '01544604708'
+              date: 2012-7
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Order
+      summary: Get All Orders
+      operationId: GetAllOrders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /orders/{id}:
+    get:
+      tags:
+      - Order
+      summary: Get Specific Order
+      operationId: GetSpecificOrder
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Order
+      summary: Delete Specific Order
+      operationId: DeleteSpecificOrder
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /posts:
+    post:
+      tags:
+      - Post
+      summary: Add Post
+      operationId: AddPost
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Post
+      summary: Get All Posts
+      operationId: GetAllPosts
+      parameters:
+      - name: limit
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 5
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 2
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /posts/{id}:
+    patch:
+      tags:
+      - Post
+      summary: Update Post
+      operationId: UpdatePost
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - image
+              - text
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                text:
+                  type: string
+                  example: Test Up
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Post
+      summary: Get Specific Posts
+      operationId: GetSpecificPosts
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Post
+      summary: Delete Specific Posts
+      operationId: DeleteSpecificPosts
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /posts/{id}/likes:
+    post:
+      tags:
+      - Post
+      summary: Add Like
+      operationId: AddLike
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Post
+      summary: Get All Likes
+      operationId: GetAllLikes
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Post
+      summary: Delete Like
+      operationId: DeleteLike
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /posts/{id}/comments:
+    post:
+      tags:
+      - Comment
+      summary: Add Comment To Post
+      operationId: AddCommentToPost
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AddCommentToPostRequest'
+              - example:
+                  text: Test
+            example:
+              text: Test
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Comment
+      summary: Get All Comment Of This Post
+      operationId: GetAllCommentOfThisPost
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /posts/{id}/comments/{commentId}:
+    patch:
+      tags:
+      - Comment
+      summary: Update Specific Comment
+      operationId: UpdateSpecificComment
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: commentId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateSpecificCommentRequest'
+              - example:
+                  text: Test
+            example:
+              text: Test
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Comment
+      summary: Update Specific Comment Copy
+      operationId: UpdateSpecificCommentCopy
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: commentId
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    SignupRequest:
+      title: SignupRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Test
+        email: test@gmail.com
+        password: '123456'
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: test@gmail.com
+        password: '123456'
+    ForgetPasswordRequest:
+      title: ForgetPasswordRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: mh3908334@gmail.com
+    VerifyResetCodeRequest:
+      title: VerifyResetCodeRequest
+      required:
+      - email
+      - resetCode
+      type: object
+      properties:
+        email:
+          type: string
+        resetCode:
+          type: string
+      example:
+        email: mh3908334@gmail.com
+        resetCode: '573257'
+    ResetPasswordRequest:
+      title: ResetPasswordRequest
+      required:
+      - newPassword
+      - email
+      type: object
+      properties:
+        newPassword:
+          type: string
+        email:
+          type: string
+      example:
+        newPassword: '123456'
+        email: mh3908334@gmail.com
+    AddLinksOfVideosRequest:
+      title: AddLinksOfVideosRequest
+      required:
+      - videos
+      type: object
+      properties:
+        videos:
+          type: array
+          items:
+            type: string
+          description: ''
+      example:
+        videos:
+        - Test 1
+        - Test 2
+        - Test 55
+    RemoveLinkRequest:
+      title: RemoveLinkRequest
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
+      example:
+        link: Test4
+    SignupAsAdminRequest:
+      title: SignupAsAdminRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Admin
+        email: admin@gmail.com
+        password: '123456'
+    RemoveCriminalDictionaryRequest:
+      title: RemoveCriminalDictionaryRequest
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
+      example:
+        link: Test 55
+    AddCriminalDictionaryRequest:
+      title: AddCriminalDictionaryRequest
+      required:
+      - title
+      - decs
+      type: object
+      properties:
+        title:
+          type: string
+        decs:
+          type: string
+      example:
+        title: Test
+        decs: ' Test Test Test Test Test Test Test Test Test '
+    UpdateNewRequest:
+      title: UpdateNewRequest
+      required:
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+      example:
+        title: 'Test '
+    RemoveSpecificQuestionRequest:
+      title: RemoveSpecificQuestionRequest
+      required:
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+      example:
+        title: Test 18
+    AddOrderRequest:
+      title: AddOrderRequest
+      required:
+      - reason
+      - desc
+      - phone
+      - date
+      type: object
+      properties:
+        reason:
+          type: string
+        desc:
+          type: string
+        phone:
+          type: string
+        date:
+          type: string
+      example:
+        reason: Test
+        desc: Test
+        phone: '01544604708'
+        date: 2012-7
+    AddCommentToPostRequest:
+      title: AddCommentToPostRequest
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+      example:
+        text: Test
+    UpdateSpecificCommentRequest:
+      title: UpdateSpecificCommentRequest
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+      example:
+        text: Test
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: User
+- name: Videos
+- name: About Me
+- name: Criminal Dictionary
+- name: News
+- name: Message
+- name: Question
+- name: Order
+- name: Post
+- name: Comment
