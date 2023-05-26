@@ -27,7 +27,7 @@ router.route('/')
     authMiddleWare,
     allowTo('manager', 'admin'),
     uploadSingleImage('image','Questions'),
-    //addQueValidator,
+    addQueValidator,
     addQuestion
   )
   .get(authMiddleWare, getAllQuestions);
