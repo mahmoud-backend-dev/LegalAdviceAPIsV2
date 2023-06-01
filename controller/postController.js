@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes');
 const Post = require('../models/Post');
 const { BadRequest } = require('../errors');
 const { uploadImageToCloudinary, deletedImageFromCloudinary } = require('../utils/cloudinary');
-
+const Comment = require('../models/Comment');
 // @decs Add Post
 // @route POST /api/v1/posts
 // @ptotect Protected/User
@@ -44,8 +44,9 @@ exports.updatePost = asyncHandler(async (req, res) => {
 // @route GET /api/v1/posts/:id
 // @ptotect Protected/User/Manager/Admin
 exports.getSpecificPost = asyncHandler(async (req, res) => {
+  const comments = await Comment.find({ post: req.params.id });
   const post = await Post.findById(req.params.id);
-  res.status(StatusCodes.OK).json({ status: "Success", post });
+  res.status(StatusCodes.OK).json({ status: "Success", numberOfComments: comments.length, post });
 })
 
 // @decs Delete Specific Posts
@@ -85,7 +86,28 @@ exports.getAllPosts = asyncHandler(async (req, res) => {
     pagination.next = page + 1;
   if (skip > 0)
     pagination.prev = page - 1;
-  const allPosts = await Post.find({}).skip(skip).limit(limit);
+  const allPosts = await Post.aggregate([{
+    $lookup: {
+      from: 'comments',
+      localField: '_id',
+      foreignField: 'post',
+      as: 'comments'
+    },
+  },
+    {
+      $project: {
+        user: 1,
+        text: 1,
+        image: 1,
+        likes: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        numberOfComments:{$size:"$comments"}
+    }
+    },
+    { $skip: skip },
+    { $limit: limit },
+  ])
   res.status(StatusCodes.OK).json({
     status: "Success",
     count: allPosts.length,
