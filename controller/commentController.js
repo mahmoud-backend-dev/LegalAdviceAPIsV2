@@ -10,8 +10,11 @@ const Comment = require('../models/Comment');
 exports.addCommentToPost = asyncHandler(async (req, res) => {
   req.body.user = req.user._id;
   req.body.post = req.params.id;
-  const post = await Comment.create(req.body)
-  res.status(StatusCodes.OK).json({ status: "Success", post });
+  const comment = await (await Comment.create(req.body)).populate({
+    path: 'user',
+    select: "-_id name"
+  });
+  res.status(StatusCodes.OK).json({ status: "Success", comment });
 });
 
 // @decs Get All Comment Of This Post 

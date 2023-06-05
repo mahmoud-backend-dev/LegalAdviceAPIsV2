@@ -4,7 +4,7 @@ const newRoute = require('./newRoute');
 const messageRoute = require('./messageRoute');
 const questionRoute = require('./questionRoute');
 const orderRoute = require('./orderRoute');
-const postRoute = require('./postRoute')
+const postRoute = require('./communityRoute')
 const videoRoute = require('./videoRoute');
 const chatRoute = require('./chatRoute');
 
