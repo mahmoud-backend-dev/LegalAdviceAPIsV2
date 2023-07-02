@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { uploadSingleImage } = require('../middleware/uploadImageMiddleWare');
-
+const authMiddleWare = require('../middleware/authMiddleware');
 
 const {
   createAboutMeValidator,
@@ -26,7 +26,9 @@ const {
   verifyResetCode,
   getAboutMe,
   signupAsAdmin,
-  loginAsAdmin
+  loginAsAdmin,
+  allowTo,
+  deleteMe
 } = require('../controller/userController')
 
 router.patch('/admin/signup', signupAsAdminValidator, signupAsAdmin);
@@ -42,5 +44,6 @@ router.post('/login', loginValidator, login);
 router.post('/forgetPassword', forgetPasswordValidator, forgetPassword);
 router.post('/verifyResetCode', verifyResetCodeValidator, verifyResetCode);
 router.post('/resetPassword', resetPasswordValidator, resetPassword);
+router.delete('/deleteMe', authMiddleWare, allowTo('user'), deleteMe);
 
 module.exports = router;

@@ -191,3 +191,11 @@ exports.resetPassword = asyncHandler(async (req, res) => {
   await user.hashPass();
   res.status(StatusCodes.OK).json({ status: "Success", token, user: santizeData(user) });
 })
+
+// @decs Delete User
+// @route POST /api/v1/user/deleteMe
+// @ptotect Protect/Private
+exports.deleteMe = asyncHandler(async (req, res) => {
+  await User.findOneAndRemove({ _id: req.user._id });
+  res.status(StatusCodes.NO_CONTENT).send();
+})
