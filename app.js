@@ -60,6 +60,8 @@ app.use(limiter)
 // Express middleware to protect against HTTP Parameter Pollution attacks
 app.use(hpp());
 
+app.set('SocketIO', io)
+
 // Mount Api
 mountRoutes(app);
 

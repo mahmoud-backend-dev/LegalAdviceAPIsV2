@@ -37,19 +37,19 @@ exports.signupAsAdmin = asyncHandler(async (req, res) => {
 });
 
 
-// @decs Login As Admin
-// @route POST /api/v1/user/admin/login
-// @ptotect Protect Admin
-exports.loginAsAdmin = asyncHandler(async (req, res) => {
-  const user = await User.findOne({ email: req.body.email, role: 'admin' });
-  if (!user)
-    throw new BadRequest(`No such user or not admin for this email: ${req.body.email}`);
-  const isMatch = await user.comparePassword(req.body.password);
-  if (!user || !isMatch)
-    throw new BadRequest('Password or E-mail incorrect');
-  const token = user.createJWT();
-  res.status(StatusCodes.OK).json({ status: "Success", token, user: santizeData(user) });
-});
+// // @decs Login As Admin
+// // @route POST /api/v1/user/admin/login
+// // @ptotect Protect Admin
+// exports.loginAsAdmin = asyncHandler(async (req, res) => {
+//   const user = await User.findOne({ email: req.body.email, role: 'admin' });
+//   if (!user)
+//     throw new BadRequest(`No such user or not admin for this email: ${req.body.email}`);
+//   const isMatch = await user.comparePassword(req.body.password);
+//   if (!user || !isMatch)
+//     throw new BadRequest('Password or E-mail incorrect');
+//   const token = user.createJWT();
+//   res.status(StatusCodes.OK).json({ status: "Success", token, user: santizeData(user) });
+// });
 
 
 // @decs About Me
