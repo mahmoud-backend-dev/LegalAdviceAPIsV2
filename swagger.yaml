@@ -4,7 +4,7 @@ info:
   contact: {}
   version: '1.0'
 servers:
-- url: https://legal-advice-1812.onrender.com/api/v1
+- url: https://legal-advice-1572.onrender.com/api/v1
   variables: {}
 - url: http://localhost:1812/api/v1
   variables: {}
