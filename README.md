@@ -1,5 +1,5 @@
 ## Hosted Project
-[Legal Adice APIs](https://legal-advice-1812.onrender.com)
+[Legal Adice APIs](https://legal-advice-1572.onrender.com)
 
 
 #### Setup Basic Express Server
@@ -67,7 +67,6 @@ DELETE  delete me  /api/v1/user/deleteMe
 ### About Me
 ```
 POST   about me    /api/v1/user/admin/643b4b51f270c6d03747aff0
-POST   login as admin    /api/v1/user/admin/login
 GET   get about me   /api/v1/user/643b4b51f270c6d03747aff0
 PATCH  update about me     /api/v1/user/643b4b51f270c6d03747aff0
 PATCH  signup as admin   /api/v1/user/admin/signup
