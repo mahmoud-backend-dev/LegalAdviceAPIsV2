@@ -32,7 +32,6 @@ const {
 } = require('../controller/userController')
 
 router.patch('/admin/signup', signupAsAdminValidator, signupAsAdmin);
-router.post('/admin/login', loginAsAdminValidator, loginAsAdmin);
 router.post('/admin/:id', uploadSingleImage('image', 'MyProfile'), createAboutMeValidator, createAboutMe);
 router.route('/:id')
   .get(updateMeValidator, getAboutMe)
