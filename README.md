@@ -12,6 +12,7 @@ APIs build to the backend for an application specifically designed for lawyers, 
 features such as add personal information about the lawyer, their experiences, 
 specializations, qualifications, and the ability to add videos, news or questions and chat 
 feature allowing communication between the lawyer and the user.
+
 Full REST APIs for Legal Advice App, APIs for User authentication POST request Signup, Login, 
 Forget Password, Verify Reset Code and Reset Password, APIs for a lawyer's admin dashboard 
 to add(POST request), retrieve(GET request) and update(PATCH request) lawyer-specific data 
